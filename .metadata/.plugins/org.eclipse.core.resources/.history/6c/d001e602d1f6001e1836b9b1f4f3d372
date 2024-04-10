@@ -1,0 +1,39 @@
+package com.miapp.bibloteca.ui;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.miapp.bibloteca.Libro;
+import com.miapp.bibloteca.Usuario;
+import com.miapp.bibloteca.service.LibroServicio;
+import com.miapp.bibloteca.service.UsuarioServicio;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<Libro> bibloteca = new ArrayList<>();
+		ArrayList<Usuario> usuarios = new ArrayList<>();
+		
+		LibroServicio libroServicio = new LibroServicio(bibloteca);
+		UsuarioServicio usuarioServicio = new UsuarioServicio(usuarios);
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		int opcion;
+		
+		do {
+			System.out.println("=========BIBLOTECA VIRTUAL=========");
+	        System.out.println(("1. Crear Libro.\n"
+	        		+ "2. Actualizar Libro\n"
+	        		+ "3. Buscar Libro por ISBN"
+	        		+ "4. "
+	        		));
+	        System.out.println("Seleccione una opcion: ");
+	        opcion = scanner.nextInt();
+	        scanner.nextLine();
+		}while(opcion != 9);
+	}
+
+}

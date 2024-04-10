@@ -1,0 +1,69 @@
+package com.miapp.bibloteca.service;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import com.miapp.bibloteca.Libro;
+import com.miapp.bibloteca.Usuario;
+
+
+public class UsuarioServicio {
+	
+	private ArrayList<Usuario> usuarios;
+	
+	public UsuarioServicio(ArrayList<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+	
+	public void crearUsuario(String nombre, String id) {
+		Usuario nuevoUsuario = new Usuario(nombre, id);
+		usuarios.add(nuevoUsuario);
+	}
+	
+	public ArrayList<Usuario> obtenerTodosLosUsuarios(){
+		return usuarios;
+	}
+	
+	public void actualizarUsuario(String id, String nuevoNombre) {
+		boolean bandera = false;
+		for(Usuario usuario : usuarios) {
+			if(usuario.getId().equals(id)) {
+				usuario.setNombre(nuevoNombre);
+				bandera = true;
+			}
+		}
+		if(bandera) {
+			System.out.println("Cambios Guardados con Exito!!!");
+		}
+		else {
+			System.out.println("El Usuario no se encontro cambios No Realiza");
+		}
+	}
+	
+	public void eliminarUsuario(String id) {
+		boolean bandera = false;
+		Iterator<Usuario> it=usuarios.iterator();
+		while(it.hasNext()) {
+			if(it.next().getId().equals(id)) {
+				it.remove();
+				bandera = true;
+			}
+		}
+		if(bandera) {
+			System.out.println("Usuario Eliminado con Exito!!!");
+		}
+		else {
+			System.out.println("El suario no se encontro no se pudo Eliminar!!!");
+		}
+	}
+	
+	public void mostrarTodosLosUsuarios(){
+		System.out.println("USUARIOS");
+		for (int i = 0; i < usuarios.size(); i++) {
+			System.out.println("==========================================");
+	        Usuario usuario = usuarios.get(i);
+	        System.out.println((i+1)+". ID: "+usuario.getId()+"\n"
+	        		+ "Nombre: "+usuario.getNombre());
+	    }
+	}
+}

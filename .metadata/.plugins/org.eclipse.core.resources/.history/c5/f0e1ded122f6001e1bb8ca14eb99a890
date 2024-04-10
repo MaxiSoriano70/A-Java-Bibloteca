@@ -1,0 +1,13 @@
+package com.miapp.bibloteca.service;
+
+import java.util.ArrayList;
+
+import com.miapp.bibloteca.Libro;
+
+public class LibroServicio {
+private ArrayList<Libro> bibloteca;
+	
+	public LibroServicio(ArrayList<Libro> bibloteca) {
+		this.bibloteca = bibloteca;
+	}
+}

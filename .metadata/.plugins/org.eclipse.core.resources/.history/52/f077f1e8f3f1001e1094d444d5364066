@@ -1,0 +1,22 @@
+package miapp.bibloteca;
+
+public class Libro {
+	private String titulo;
+	private String autor;
+	private String ISBN;
+	private String genero;
+	private boolean disponible;
+	
+	public Libro(String titulo, String autor, String iSBN, String genero) {
+		this.titulo = titulo;
+		this.autor = autor;
+		this.ISBN = iSBN;
+		this.genero = genero;
+		this.disponible = true;
+	}
+	
+	public Libro() {
+	}
+	
+	
+}

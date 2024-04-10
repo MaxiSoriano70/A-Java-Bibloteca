@@ -1,0 +1,7 @@
+package miapp.bibloteca;
+
+public class Usuario {
+	private String nombre;
+	private String id;
+	private ArrayList<Libro> librosPrestados;
+}

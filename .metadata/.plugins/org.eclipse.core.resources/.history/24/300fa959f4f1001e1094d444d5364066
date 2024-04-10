@@ -1,0 +1,16 @@
+package miapp.bibloteca;
+
+import java.util.ArrayList;
+
+public class Usuario {
+	private String nombre;
+	private String id;
+	private ArrayList<Libro> librosPrestados;
+	
+	public Usuario(String nombre, String id) {
+		this.nombre = nombre;
+		this.id = id;
+		this.librosPrestados = new ArrayList<>();
+	}
+	
+}

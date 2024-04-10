@@ -1,0 +1,71 @@
+package com.miapp.bibloteca.service;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import com.miapp.bibloteca.Libro;
+
+public class LibroServicio {
+	
+	private ArrayList<Libro> bibloteca;
+	
+	public LibroServicio(ArrayList<Libro> bibloteca) {
+		this.bibloteca = bibloteca;
+	}
+	
+	public void crearLibro(String titulo, String autor, String ISBN, String genero) {
+		Libro nuevoLibro = new Libro(titulo, autor, ISBN, genero);
+		bibloteca.add(nuevoLibro);
+	}
+	
+	public ArrayList<Libro> obtenerTodosLosLibros(){
+		return bibloteca;
+	}
+	
+	public void actualizarLibro(String ISBN, String nuevoTitulo, String nuevoAutor, String nuevoGenero) {
+		boolean bandera = false;
+		for(Libro libro : bibloteca) {
+			if(libro.getISBN().equals(ISBN)) {
+				libro.setTitulo(nuevoTitulo);
+				libro.setAutor(nuevoAutor);
+				libro.setGenero(nuevoGenero);
+				bandera = true;
+			}
+		}
+		if(bandera) {
+			System.out.println("Cambios Guardados con Exito!!!!");
+		}
+		else {
+			System.out.println("El libro no se encontro cambios No Realiza");
+		}
+	}
+	
+	public void eliminarLibro(String ISBN) {
+		boolean bandera = false;
+		Iterator<Libro> it=bibloteca.iterator();
+		while(it.hasNext()) {
+			if(it.next().getISBN().equals(ISBN)) {
+				it.remove();
+				bandera = true;
+			}
+		}
+		if(bandera) {
+			System.out.println("Libro Eliminado con Exito!!!");
+		}
+		else {
+			System.out.println("El libro no se encontro no se pudo Eliminar!!!");
+		}
+	}
+	
+	public void mostrarTodosLosLibros(){
+		System.out.println("LIBROS");
+		for (int i = 0; i < bibloteca.size(); i++) {
+			System.out.println("==========================================");
+	        Libro libro = bibloteca.get(i);
+	        System.out.println((i+1)+". Libro: "+libro.getTitulo()+"\n"
+	        		+ "Autor: "+libro.getAutor()+"\n"
+	        		+ "ISBN: "+libro.getISBN()+"\n"
+	        		+ "Genero: "+libro.getGenero());
+	    }
+	}
+}

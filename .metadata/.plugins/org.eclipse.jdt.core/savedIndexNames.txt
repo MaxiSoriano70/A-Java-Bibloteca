@@ -1,0 +1,4 @@
+INDEX VERSION 1.132+D:\Cursos\En curso\Alkemy Java\06. Proyecto Final\Bibloteca\.metadata\.plugins\org.eclipse.jdt.core
+1261250887.index
+1865797976.index
+2565932667.index

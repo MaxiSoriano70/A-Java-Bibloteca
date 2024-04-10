@@ -1,0 +1,114 @@
+package com.miapp.bibloteca.ui;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.miapp.bibloteca.Libro;
+import com.miapp.bibloteca.Usuario;
+import com.miapp.bibloteca.service.LibroServicio;
+import com.miapp.bibloteca.service.UsuarioServicio;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<Libro> bibloteca = new ArrayList<>();
+		ArrayList<Usuario> usuarios = new ArrayList<>();
+		
+		LibroServicio libroServicio = new LibroServicio(bibloteca);
+		UsuarioServicio usuarioServicio = new UsuarioServicio(usuarios);
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		int opcion;
+		
+		do {
+			System.out.println("=========BIBLOTECA VIRTUAL=========");
+	        System.out.println(("1. Crear Libro.\n"
+	        		+ "2. Actualizar Libro.\n"
+	        		+ "3. Buscar Libro por ISBN.\n"
+	        		+ "4. Buscar Libros por Titulo.\n"
+	        		+ "5. Listar todos los Libros.\n"
+	        		+ "6. Listar todos los Libros disponibles a prestar.\n"
+	        		));
+	        System.out.println("Seleccione una opcion: ");
+	        opcion = scanner.nextInt();
+	        scanner.nextLine();
+	        switch(opcion) {
+	        case 1:
+	        	pedirDatosParaCrearLibro(scanner, libroServicio);
+	        	break;
+	        case 2:
+	        	pedirDatosParaActualizarLibro(scanner, libroServicio);
+	        	break;
+	        case 3:
+	        	pedirIsbnParaBuscar(scanner, libroServicio);
+	        	break;
+	        case 4:
+	        	
+	        	break;
+	        }
+		}while(opcion != 9);
+	}
+	
+	public static void pedirDatosParaCrearLibro(Scanner scanner, LibroServicio libroServicio) {
+		System.out.println("Ingrese el titulo: ");
+        String titulo = scanner.nextLine();
+        System.out.println("Ingrese el autor: ");
+        String autor = scanner.nextLine();
+        System.out.println("Ingrese el ISBN: ");
+        String isbn = scanner.nextLine();
+        System.out.println("Ingrese el genero: ");
+        String genero = scanner.nextLine();
+        libroServicio.crearLibro(titulo, autor, isbn, genero);
+    }
+	
+	public static void pedirDatosParaActualizarLibro(Scanner scanner, LibroServicio libroServicio) {
+        System.out.println("Ingrese el ISBN del libro a actualizar: ");
+        String isbnActualizar = scanner.nextLine();
+        String titulo = scanner.nextLine();
+        System.out.println("Ingrese el nuevo autor: ");
+        String autor = scanner.nextLine();
+        System.out.println("Ingrese el nuevo genero: ");
+        String genero = scanner.nextLine();
+        libroServicio.actualizarLibro(isbnActualizar, titulo, autor, genero);
+    }
+	
+	public static void pedirIsbnParaBuscar(Scanner scanner, LibroServicio libroServicio) {
+		System.out.println("Ingrese el ISBN del libro a buscar: ");
+        String isbnBuscar = scanner.nextLine();
+        Libro libroISBN = libroServicio.buscarLibroPorISBN(isbnBuscar);
+        if(libroISBN != null) {
+        	System.out.println("Libro encontrado: "+libroISBN.getTitulo()+"\n"
+        			+ "ISBN: "+libroISBN.getISBN()+"\n"
+        			+ "Autor: "+libroISBN.getAutor()+"\n"
+        			+ "Genero: "+libroISBN.getGenero());
+        }
+        else {
+        	System.out.println("Libro no encontado!!!");
+        }
+	}
+	
+	public static void pedirTituloParaBuscar(Scanner scanner, LibroServicio libroServicio) {
+		System.out.println("Ingrese el titulo del libro a buscar: ");
+        String tituloBuscar = scanner.nextLine();
+        ArrayList<Libro> librosPortitulo = libroServicio.burcarLibrosPortitulo(tituloBuscar);
+        if(!librosPortitulo.isEmpty()) {
+        	System.out.println("Libros encontrados: ");
+        	for (int i = 0; i < librosPortitulo.size(); i++) {
+    			System.out.println("==========================================");
+    	        Libro libro = librosPortitulo.get(i);
+    	        String disponible = libro.isDisponible()?"SI":"NO";
+    	        System.out.println((i+1)+". Libro: "+libro.getTitulo()+"\n"
+    	        		+ "Autor: "+libro.getAutor()+"\n"
+    	        		+ "ISBN: "+libro.getISBN()+"\n"
+    	        		+ "Genero: "+libro.getGenero()+"\n"
+    	        		+ "Disponible: "+disponible);
+    	    }
+        }
+        else {
+        	System.out.println("Libro no encontado!!!");
+        }
+	}
+}

@@ -1,0 +1,5 @@
+package com.miapp.bibloteca.service;
+
+public class LibroServicio {
+
+}
